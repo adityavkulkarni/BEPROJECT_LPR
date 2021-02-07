@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<style>
+    html {
+    height: 100%;
+}
+    body
+    {
+    color : #ffffff;
+    text-align:center;
+  background: #000046;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to top, #1CB5E0, #000046);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to top, #1CB5E0, #000046); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+         height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    }
+    table {
+    background-color:  #adadeb;
+    color :#000000;
+    width:70%;
+    margin-left:15%;
+    margin-right:15%;
+  }
+input
+    {
+          position: relative;
+  font-family: calibri;
+  padding: 10px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border: 1px dashed #BBB;
+  text-align: center;
+  background-color:  #adadeb;
+  cursor: pointer;
+   }
+h1 {
+  color: maroon;
+  margin-left: 40px;
+}
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <title>UPLOAD</title>
+
+<script>
+
+         function GFG_Fun() {
+            var img = document.createElement('img');
+            img.src =  '/home/aditya/sih/sih_flask/op/detected.jpg';
+            document.getElementById('body').appendChild(img);
+            down.innerHTML = "Image Element Added.";
+        }
+    </script>
+
+
+</head>
+<body id="body">
+<form action = "http://localhost:5000/uploader" method = "POST"
+         enctype = "multipart/form-data">
+       <br> <center> <input type = "file" name = "file" width="300" /></center><br>
+         <center><input type = "submit" width="150" /></center>
+      </form>
+
+
+{{tab}}
+  <button onclick = "GFG_Fun()">
+        click here
+    </button>
+</body>
+</html>
