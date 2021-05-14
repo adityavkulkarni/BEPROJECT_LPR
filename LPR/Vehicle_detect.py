@@ -36,9 +36,12 @@ def get_object(image, model):
     height, width, channels = img.shape
     roi: List[Any] = []
 
-    if model == 'lapi': net = cv2.dnn.readNet(LAPI_WEIGHT_PATH, LAPI_CFG_PATH)
-    elif model == 'yolo':  net = cv2.dnn.readNet(YOLO_WEIGHT_PATH, YOLO_CFG_PATH)
-    else: return
+    if model == 'lapi':
+        net = cv2.dnn.readNet(LAPI_WEIGHT_PATH, LAPI_CFG_PATH)
+    elif model == 'yolo':
+        net = cv2.dnn.readNet(YOLO_WEIGHT_PATH, YOLO_CFG_PATH)
+    else:
+        return
 
     layer_names = net.getLayerNames()
     output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
@@ -84,12 +87,11 @@ def get_object(image, model):
     return stat, roi, img, dims
 
 
-
 def detect_img(image, cnt, op='Output'):
     start = timeit.default_timer()
 
     veh_path = IMAGE_OUTPUT_DIR + op + '_' + str(cnt) + '.jpg'
-    stat_v, roi, image, dim = get_object(image,model='yolo')
+    stat_v, roi, image, dim = get_object(image, model='yolo')
     if stat_v:
         cv2.imwrite(veh_path, image)
 
@@ -102,10 +104,11 @@ def detect_img(image, cnt, op='Output'):
             im = put_text(image, dim, txt)
             cv2.imwrite(IMAGE_OUTPUT_DIR + 'fin.jpg', im)
             fin1 = im
-            print('PLATE FOUND\nTEXT: '+txt)
+            print('PLATE FOUND\nTEXT: ' + txt)
     stop = timeit.default_timer()
-    print("TIME:" + str(stop-start))
-    return  txt, fin1
+    print("TIME:" + str(stop - start))
+    return txt, fin1
+
 
 def detect_vid(fname, output='Output', skip=1):
     i = 0
@@ -146,12 +149,9 @@ def detect_vid(fname, output='Output', skip=1):
     return stop - start
 
 
-
-
-
 def proc_vid(image, cnt):
     veh_path = VIDEO_OUTPUT_DIR + '_' + str(cnt) + '.jpg'
-    stat_v, roi, image, dim = get_object(image,model='yolo')
+    stat_v, roi, image, dim = get_object(image, model='yolo')
     if stat_v:
         print('\nVEHICLE FOUND')
         cv2.imwrite(veh_path, image)
