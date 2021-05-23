@@ -23,7 +23,7 @@
   <link href="/static/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="/static/responsive.css" rel="stylesheet" />
-	
+
 	<title>Add a vehicle</title>
 
 </head>
@@ -36,7 +36,7 @@
                     <div class="nav-item"> <a class="nav-link" id="pills-signup-tab" style="color: #f7f7f7; background-color: #fc5d35;" data-toggle="pill" href="#pills-signup" role="tab" aria-controls="pills-signup" aria-selected="false">Add Vehicle Details</a> </div>
                 </div>
 				<div class="tab-content" id="pills-tabContent">
-				
+
 					<div class="tab-pane fade show active" id="pills-signup" role="tabpanel" aria-labelledby="pills-signup-tab">
 						<div class="col-sm-12 border border-primary shadow rounded bg-white pt-2">
 							<div class="text-center"> <span class="fa-stack fa-3x">
@@ -44,28 +44,37 @@
                <i class="fa fa-user-plus fa-stack-1x"></i>
             </span></div>
 							<em id="signUpMsg"></em>
-							<form method="post" id="singnupFrom" onSubmit="return false;">
+							<form method="post" id="singnupFrom" ">
 								<div class="form-group">
-									<label class="font-weight-bold">Vehicle Number <span class="text-danger">*</span></label>
-									<input type="text" class="form-control form-control-lg" placeholder="Enter vehicle number" data-required>
+									<label class="font-weight-bold">Vehicle Number <span class="text-danger">*
+									{% if flag == 'true'  %}
+										Last number plate: {{num}}
+
+									</span></label>
+									<input type="text" class="form-control form-control-lg" placeholder="Enter vehicle number" data-required name="vehicleno"  value="{{num}}">
+									{% else %}
+									</span></label>
+									<input type="text" class="form-control form-control-lg" placeholder="Enter vehicle number" data-required name="vehicleno"  >
+									 {% endif %}
 								</div>
 								<div class="form-group">
 									<label class="font-weight-bold">Vehicle owner name Name <span class="text-danger">*</span></label>
-									<input type="text" class="form-control form-control-lg" placeholder="Enter owner name" data-required>
+									<input type="text" class="form-control form-control-lg" placeholder="Enter owner name" data-required name="name">
 								</div>
 								<div class="form-group">
 									<label class="font-weight-bold">Contact Number <span class="text-danger">*</span></label>
-									<input type="number" class="form-control form-control-lg" placeholder="Enter contact no. " data-required>
+									<input type="number" class="form-control form-control-lg" placeholder="Enter contact no. " data-required name="contactno">
 								</div>
 								<div class="form-group">
 									<label class="font-weight-bold">Address <span class="text-danger">*</span></label>
-									<input type="password" class="form-control form-control-lg" placeholder="Enter Address" data-required>
+									<input type="password" class="form-control form-control-lg" placeholder="Enter Address" data-required name="address">
 								</div>
+
 								<div class="form-group">
 									<label><input type="checkbox" name="signupcondition" id="signupcondition" value="1" data-required> I agree with the <a href="javascript:;">Terms &amp; Conditions.</a></label>
 								</div>
-                                
-                                
+
+
 								<div class="form-group text-center">
 									<button style= "width:fit-content", class="btn btn-block custom_orange-btn" onClick="formValidate('#singnupFrom','#signUpMsg');"><i class="fa fa-fw fa-sign-out-alt"></i> Add to database &nbsp </button>
 								</div>
@@ -76,12 +85,12 @@
 			</div> <!--/.col-xs-12 col-sm-8 col-md-6 col-lg-4-->
 		</div> <!--/.mt-2 mb-4-->
 	</div> <!--/.container-->
-	
-	<!-- Optional JavaScript --> 
-	<!-- jQuery first, then Popper.js, then Bootstrap JS --> 
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
- 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> 
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script src="js/form-script.js"></script>
 </body>

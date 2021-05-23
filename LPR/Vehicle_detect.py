@@ -4,6 +4,8 @@ from PIL import Image
 import cv2
 import numpy as np
 import timeit
+
+import paths
 from paths import *
 import re
 
@@ -14,7 +16,7 @@ def get_roi(image, x, y, width, height):
 
 
 def read_num(fname):
-    pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
+    #pytesseract.pytesseract.tesseract_cmd = paths.TESSERACT_PATH
     text = pytesseract.image_to_string(Image.fromarray(fname))
     return check_txt(text)
 
@@ -90,7 +92,7 @@ def get_object(image, model):
 def detect_img(image, cnt, op='Output'):
     start = timeit.default_timer()
 
-    veh_path = IMAGE_OUTPUT_DIR + op + '_' + str(cnt) + '.jpg'
+    veh_path = IMAGE_OUTPUT_DIR + op + '_' +paths.RANDOM+'__'+ str(cnt) + '.jpg'
     stat_v, roi, image, dim = get_object(image, model='yolo')
     if stat_v:
         cv2.imwrite(veh_path, image)
@@ -102,7 +104,7 @@ def detect_img(image, cnt, op='Output'):
         for j in range(len(plates)):
             txt = read_num(plates[j])
             im = put_text(image, dim, txt)
-            cv2.imwrite(IMAGE_OUTPUT_DIR + 'fin.jpg', im)
+            cv2.imwrite(IMAGE_OUTPUT_DIR + 'fin_'+paths.RANDOM+'.jpg', im)
             fin1 = im
             print('PLATE FOUND\nTEXT: ' + txt)
     stop = timeit.default_timer()

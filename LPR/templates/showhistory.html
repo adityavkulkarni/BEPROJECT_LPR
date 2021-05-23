@@ -42,7 +42,58 @@
       to {
         visibility: hidden;
       }
-    }</style>
+    }
+        
+        .custom_red-btn,
+.custom_green-btn {
+  display: inline-block;
+  padding: 10px 0;
+  text-align: center;
+  width: 145px;
+  outline: none;
+  color: #f7f7f7;
+  border: 1px solid transparent;
+}
+
+.custom_red-btn {
+  background-color: #f70430;
+}
+
+.custom_red-btn:hover {
+  border: 1px solid #000000;
+  color: #f70430;
+  background-color: transparent;
+}
+
+.custom_green-btn {
+  background-color: #5cce53;
+}
+
+.custom_green-btn:hover {
+  border: 1px solid #5cce53;
+  color: #5cce53;
+  background-color: transparent;
+}
+        .quote_btn-container1 a {
+  display: inline-block;
+  padding: 5px 15px;
+  background-color: #5cce53;
+  color: #f7f7f7;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+           .quote_btn-container2 a {
+  display: inline-block;
+  padding: 5px 15px;
+  background-color: #f70430;
+  color: #f7f7f7;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+
+        
+    </style>
 </head>
 
 <body class="hero_area sub_pages">
@@ -78,10 +129,31 @@
   <!-- service section -->
 
   <section class="service_section layout_padding " style="background-color: #f7f7f7;">
-    <div class="container">
-     
-      
+<div class="container bcontent">
+        <hr />
+  {% for dict_item in parent_list %}
+
+        <div class="card" style="">
+            <div class="row no-gutters">
+
+                <div class="col-sm-5">
+                    <img class="card-img" src="{{dict_item['Path']}}" alt="Suresh Dasari Card">
+                </div>
+                <div class="col-sm-7">
+                    <div class="card-body">
+                        <h5 class="card-title">{{dict_item['Timestamp']}}</h5>
+                        <p class="card-text">{{dict_item['Status']}}</p>
+                        <a href="#" class="btn custom_orange-btn">View Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <hr/>
+  {% endfor %}
     </div>
+
   </section>
 
   <!-- end service section -->

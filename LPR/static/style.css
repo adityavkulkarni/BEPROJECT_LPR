@@ -60,7 +60,10 @@ body {
   color: #fc5d35;
   background-color: transparent;
 }
-
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}
 .custom_heading {
   text-align: center;
   font-weight: bold;
@@ -308,6 +311,23 @@ a:focus {
 .service_section .card:hover::after {
   background-color: #fc5d35;
 }
+
+.card-known:hover::after {
+  background-color: #5cce53;
+}
+.service_section #card-known .card-title {
+  color: #5cce53;
+
+}
+.card-unknown:hover::after {
+  background-color: #f70430;
+}
+.card-unknown .card-title {
+  color: #f70430;
+
+}
+
+
 
 /* end service section */
 
