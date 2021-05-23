@@ -98,13 +98,7 @@ def get_details(id):
     return data
 
 def insert_history_data(status,image):
-    '''Insert Data into history_data'''
-    # loaded image from temp dir
-    #image = Image.open(TEMP_DIR_PATH+'detected.png')
     blob_val = open(TEMP_DIR_PATH+image,'rb').read()
-    # db.create_connection(paths.MASTER_DB_PATH)
-    # deleting unknown vehicle from temp dir after storing to db
-    # image.close()
     conn = create_connection()
     insert_query = '''
                     INSERT INTO history_data (status,photo,timestamp)

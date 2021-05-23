@@ -28,6 +28,20 @@
 
 </head>
 <body>
+<div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+          <a class="navbar-brand" href="/">
+            <img src="/static/code.png" alt="" /><span>
+              LPR
+            </span>
+          </a>
+
+            <span class="navbar-toggler-icon"></span>
+
+
+
+        </nav>
+      </div>
 	<div class="overlay"></div>
 	<div class="container">
 		<div class="mt-2 mb-4">
@@ -51,27 +65,27 @@
 										Last number plate: {{num}}
 
 									</span></label>
-									<input type="text" class="form-control form-control-lg" placeholder="Enter vehicle number" data-required name="vehicleno"  value="{{num}}">
+									<input type="text" class="form-control form-control-lg" placeholder="Enter vehicle number" required name="vehicleno"  value="{{num}}">
 									{% else %}
 									</span></label>
-									<input type="text" class="form-control form-control-lg" placeholder="Enter vehicle number" data-required name="vehicleno"  >
+									<input type="text" class="form-control form-control-lg" placeholder="Enter vehicle number" required name="vehicleno"  >
 									 {% endif %}
 								</div>
 								<div class="form-group">
 									<label class="font-weight-bold">Vehicle owner name Name <span class="text-danger">*</span></label>
-									<input type="text" class="form-control form-control-lg" placeholder="Enter owner name" data-required name="name">
+									<input type="text" class="form-control form-control-lg" placeholder="Enter owner name" required name="name">
 								</div>
 								<div class="form-group">
 									<label class="font-weight-bold">Contact Number <span class="text-danger">*</span></label>
-									<input type="number" class="form-control form-control-lg" placeholder="Enter contact no. " data-required name="contactno">
+									<input type="number" class="form-control form-control-lg" placeholder="Enter contact no. " required name="contactno">
 								</div>
 								<div class="form-group">
 									<label class="font-weight-bold">Address <span class="text-danger">*</span></label>
-									<input type="password" class="form-control form-control-lg" placeholder="Enter Address" data-required name="address">
+									<input type="password" class="form-control form-control-lg" placeholder="Enter Address" required name="address">
 								</div>
 
 								<div class="form-group">
-									<label><input type="checkbox" name="signupcondition" id="signupcondition" value="1" data-required> I agree with the <a href="javascript:;">Terms &amp; Conditions.</a></label>
+									<label><input type="checkbox" name="signupcondition" id="signupcondition" value="1" required> I agree with the <a href="javascript:;">Terms &amp; Conditions.</a></label>
 								</div>
 
 
