@@ -26,7 +26,7 @@ def get_roi(image, x, y, width, height):
     return roi
 
 
-def read_num(fname, mode='api'):
+def read_num(fname, mode='tesseract'):
     '''
     Extract text from image
     :param fname: path where image is stored
@@ -35,7 +35,7 @@ def read_num(fname, mode='api'):
     '''
     text = ''
     if mode == 'tesseract':
-        pytesseract.pytesseract.tesseract_cmd = paths.TESSERACT_PATH
+        #pytesseract.pytesseract.tesseract_cmd = paths.TESSERACT_PATH
         text = pytesseract.image_to_string(Image.fromarray(fname))
     else:
         Image.fromarray(fname).save(OCR_TEMP_DIR_PATH + 'temp.png')
