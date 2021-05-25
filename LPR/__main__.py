@@ -37,8 +37,8 @@ def render_vehicle_info():
     if request.method == 'POST':
         id = request.form['vehicle_id']
         img = db.get_image_data(id)
-        return render_template('viewinfo_image.html')
-    return render_template('viewinfo.html')
+        return render_template('vehicleinfo_image.html')
+    return render_template('vehicleinfo.html')
 
 ## ADD NEW VEHICLE INFO
 @app.route('/addavehicle', methods=['GET', 'POST'])
@@ -56,7 +56,7 @@ def render_addavehicle():
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file1():
-    return render_template('vehicle.html', type2='', tab="")
+    return render_template('upload.html', type2='', tab="")
 
 @app.route('/uploader', methods=['GET', 'POST'])
 def upload_file():
@@ -82,7 +82,7 @@ def upload_file():
             cv2.imwrite(IMAGE_OUTPUT_DIR + 'detected_' + paths.TIMESTAMP() + '.jpg', image)
             db.insert_history_data(1,cur_name)
             is_history_updated = True
-            return render_template('vehicle.html', type2='', tab=Markup(data.to_html(classes='table')))
+            return render_template('upload.html', type2='', tab=Markup(data.to_html(classes='table')))
         else:
             print("Data not in DB")
             global flag, num
