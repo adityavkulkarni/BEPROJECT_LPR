@@ -76,7 +76,7 @@
 <body class="hero_area sub_pages">
 
 <div class="hero_area sub_pages">
-    <!-- header section strats -->
+    <!-- header section strats
     <header class="header_section">
         <div class="container">
             <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
@@ -88,12 +88,12 @@
             </nav>
         </div>
     </header>
-    <!-- end header section -->
+    end header section -->
 
 
     <!-- service section -->
-
-    <section class="service_section layout_padding " style="background-color: #E0E0E0;">
+<br>
+    <section class="service_section layout_padding " style="background-color: #E0E0E0;padding-top:0;">
         <div class="container">
 
             <div class="alert">
@@ -104,12 +104,17 @@
                 <!--<div id="overlay">
                     <div id="overlay-content"><img align="left" src="static/images/warning12-1.gif" style="float:left; "></div>
                 </div>-->
-                <img class="card-img-top" src="{{ url_for('static', filename=name) }}"  style="50%">
+                <img class="card-img-top" src="{{ url_for('static', filename=name) }}"  style="width:50%">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                        additional
-                        content. This content is a little bit longer.</p>
+                    {% if enable == 'true' %}
+                    <h5 class="card-title">Vehicle Not Found in Database</h5>
+                    <p class="card-text">Please check as the vehicle in image does not belong to premise.</p>
+                    <h6 class="card-text">Time: {{time}}</h6>
+                     {% else %}
+                    <h5 class="card-title">Number plate not found in image</h5>
+                    <p class="card-text">Please try with another image.</p>
+                    <h6 class="card-title"> {{time}}</h6>
+                    {% endif %}
                     <div class="card-body">
                         {% if enable == 'true' %}
                         <a class="text-uppercase custom_orange-btn mr-3" href="/addavehicle">

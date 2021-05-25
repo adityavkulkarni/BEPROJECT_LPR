@@ -1,5 +1,6 @@
 import requests
 
+
 def image_to_string(filename, overlay=False, api_key='67ef8ecdea88957', language='eng'):
     """ OCR.space API request with local file.
         Python3.5 - not tested on 2.7
@@ -11,22 +12,22 @@ def image_to_string(filename, overlay=False, api_key='67ef8ecdea88957', language
     :param language: Language code to be used in OCR.
                     List of available language codes can be found on https://ocr.space/OCRAPI
                     Defaults to 'en'.
-    :return: Result in JSON format.
+    :return: number plate text
     """
     payload = {'isOverlayRequired': overlay,
                'apikey': api_key,
                'language': language,
-               'OCREngine':2
+               'OCREngine': 2
                }
     with open(filename, 'rb') as f:
         r = requests.post('https://api.ocr.space/parse/image',
                           files={filename: f},
                           data=payload,
                           )
-    return r.content.decode()
+    return r.json()['ParsedResults'][0]['ParsedText']
 
-# Use examples:
-if __name__=='__main__':
+
+if __name__ == '__main__':
     test_file = image_to_string(filename='im/images (2).jpeg', language='eng')
     print(test_file)
-#test_url = ocr_space_url(url='http://i.imgur.com/31d5L5y.jpg')
+# test_url = ocr_space_url(url='http://i.imgur.com/31d5L5y.jpg')
