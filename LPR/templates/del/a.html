@@ -1,0 +1,75 @@
+<html>
+    <head><title>hi</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
+<script>
+$(document).ready(function(){
+ // $("#hide").click(function(){
+    $("table").hide();
+  //});
+  $("#show").click(function(){
+    $("table").show();
+  });
+});
+</script>
+        <style>
+         body {
+         background-image: url('/home/aditya/Pictures/1.jpg');
+         background-repeat: no-repeat;
+         background-attachment: fixed;
+         background-position: center;
+            }
+            div.a {
+                
+                position:fixed;
+                bottom:0;
+                text-align: center;
+                margin-left: 750px;
+                opacity: 0.4;
+               font-family: 'Varela Round';font-size: 36px;
+                color: black;
+         }
+            .btn_upload {color:black;
+                border-radius: 15px;
+                background-color:#ebebe0;
+                font-size: 20;
+                width: 150px;
+                height: 50px;
+            }
+            img {
+  border-radius: 10%;
+}
+            
+      </style>
+    </head>
+<body>
+    
+    <div class="a"><p><font size="25"><b><center>TEAM CYPHER</center></b></font></p></div><br><br><br><br>
+    <p><input type="file"  accept="image/*" name="image" id="file"  onchange="loadFile(event)" style="display: none;"></p>
+    <p><center><button type=button class="btn_upload"><label for="file" style="cursor: pointer;" class="btn_upload">Upload Image</label></button></center></p>
+
+<table border="0" align="center" width="1200px" cellspacing="25" cellpadding="15">
+         <tr>
+             <td><center><b><font size=10>Original Image</font></b></center></td>
+             <td><center><b><font size=10>Vehicle Detection</font></b></center></td>
+             <td><center><b><font size=10>Number Plate Scanning</font></b></center></td>
+         </tr>
+         <tr>
+            <td><center><img id="output" width="200" /></center></td>
+            <td><center><img id="output1"  height="300px" width="300px"></center></td>
+            <td><center><img id="output2"  height="100px" width="300px"></center></td>
+         </tr>
+    </table>
+    <center><button id="show"  class="btn_upload">Show</button></center>
+<script>
+var loadFile = function(event) {
+	var image = document.getElementById('output');
+	var image1 = document.getElementById('output1');
+	var image2 = document.getElementById('output2');
+	image.src = URL.createObjectURL(event.target.files[0]);
+	image1.src = URL.createObjectURL(event.target.files[0]);
+	image2.src = URL.createObjectURL(event.target.files[0]);
+};
+</script>
+</body>
+</html>
