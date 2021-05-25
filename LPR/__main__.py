@@ -10,14 +10,16 @@ import Database as db
 app = Flask(__name__)
 app.config['STATIC_FOLDER'] = 'static'
 
+files = glob.glob(TEMP_DIR_PATH + '*')
+for f in files:
+    os.remove(f)
 flag = None
 num = None
+is_history_updated = False
+history = db.get_history_data()
 
 @app.route('/')
 def index():
-    files = glob.glob(TEMP_DIR_PATH+'*')
-    for f in files:
-        os.remove(f)
     return render_template('index.html',static_url_path='/static')
 
 @app.route('/details')
@@ -26,7 +28,9 @@ def render_details():
 
 @app.route('/showhistory')
 def render_history():
-        return render_template('showhistory.html', parent_list=db.get_history_data())
+        global  history,is_history_updated
+        if is_history_updated: history = db.get_history_data()
+        return render_template('showhistory.html', parent_list=history)
 
 @app.route('/vehicleinfo', methods=['GET', 'POST'])
 def render_vehicle_info():
@@ -56,6 +60,7 @@ def upload_file1():
 
 @app.route('/uploader', methods=['GET', 'POST'])
 def upload_file():
+    global  is_history_updated
     if request.method == 'POST':
         filestr = request.files['file'].read()
         npimg = np.fromstring(filestr, np.uint8)
@@ -68,6 +73,7 @@ def upload_file():
         if len(text)<1  :
             print("Number Plate not detected")
             db.insert_history_data(0,cur_name)
+            is_history_updated = True
             return render_template('warning.html', static_url_path='/static',name ='tempdata/'+cur_name)
 
         #Database.create_connection(MASTER_DB_PATH)
@@ -75,6 +81,7 @@ def upload_file():
         if data is not None:
             cv2.imwrite(IMAGE_OUTPUT_DIR + 'detected_' + paths.TIMESTAMP() + '.jpg', image)
             db.insert_history_data(1,cur_name)
+            is_history_updated = True
             return render_template('vehicle.html', type2='', tab=Markup(data.to_html(classes='table')))
         else:
             print("Data not in DB")
@@ -83,6 +90,7 @@ def upload_file():
             flag = 'true'
             cv2.imwrite(IMAGE_OUTPUT_DIR + 'detected_' + paths.TIMESTAMP() + '.jpg', image)
             db.insert_history_data(2,cur_name)
+            is_history_updated = True
             return render_template('warning.html', static_url_path='/static',name ='tempdata/'+cur_name, enable='true')
 
 app.run(port=8986)

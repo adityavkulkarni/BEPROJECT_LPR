@@ -37,12 +37,12 @@ body {
   text-align: center;
   width: 145px;
   outline: none;
-  color: #f7f7f7;
   border: 1px solid transparent;
 }
 
 .custom_dark-btn {
   background-color: #000000;
+     color: #f7f7f7;
 }
 
 .custom_dark-btn:hover {
@@ -52,12 +52,13 @@ body {
 }
 
 .custom_orange-btn {
-  background-color: #fc5d35;
+  background-color: #b5f7ec;
+     color: #000000;
 }
 
 .custom_orange-btn:hover {
-  border: 1px solid #fc5d35;
-  color: #fc5d35;
+  border: 1px solid dodgerblue;
+  color: dodgerblue;
   background-color: transparent;
 }
 .card-horizontal {
@@ -77,7 +78,7 @@ body {
 /*header section*/
 .hero_area {
   height: 98vh;
-  background-color: #f7f7f7;
+  background-color: #eeeeee;
 }
 
 .hero_area.sub_pages {
@@ -174,8 +175,8 @@ a:focus {
 .quote_btn-container a {
   display: inline-block;
   padding: 5px 15px;
-  background-color: #fc5d35;
-  color: #f7f7f7;
+  background-color: #b5f7ec;
+  color: #000000;
   font-size: 14px;
   text-transform: uppercase;
 }
@@ -262,7 +263,7 @@ a:focus {
 
 .slider_section .custom_carousel-control .carousel-control-prev {
   background-image: url(../images/prev.png);
-  background-color: #fc5d35;
+  background-color: #b5f7ec;
 }
 
 .slider_section .custom_carousel-control .carousel-control-next {
@@ -275,6 +276,10 @@ a:focus {
 
 /* service section */
 .service_section .card .card-img-top {
+  width: 400px;
+  margin: 55px auto 5px auto;
+}
+#card-img-top {
   width: 50px;
   margin: 55px auto 5px auto;
 }
@@ -286,7 +291,7 @@ a:focus {
 }
 
 .service_section .card .card-title {
-  color: #fc5d35;
+  color: dodgerblue;
 
 }
 
@@ -309,20 +314,20 @@ a:focus {
 }
 
 .service_section .card:hover::after {
-  background-color: #fc5d35;
+  background-color: #b5f7ec;
 }
 
-.card-known:hover::after {
+.service_section #card-known:hover::after {
   background-color: #5cce53;
 }
 .service_section #card-known .card-title {
   color: #5cce53;
 
 }
-.card-unknown:hover::after {
+.service_section #card-unknown:hover::after {
   background-color: #f70430;
 }
-.card-unknown .card-title {
+.service_section #card-unknown .card-title {
   color: #f70430;
 
 }
@@ -405,7 +410,7 @@ a:focus {
 
 .client_section .custom_carousel-control .carousel-control-prev:hover,
 .client_section .custom_carousel-control .carousel-control-next:hover {
-  background-color: #fc5d35;
+  background-color: #b5f7ec;
 }
 
 .client_section .custom_carousel-control .carousel-control-prev {
@@ -442,8 +447,8 @@ a:focus {
 
 .contact_form-container button {
   border: none;
-  background-color: #fc5d35;
-  color: #fff;
+  background-color: #b5f7ec;
+  color: #000000;
   padding: 8px 40px;
   text-transform: uppercase;
   font-size: 14px;
@@ -491,7 +496,7 @@ a:focus {
 }
 
 .info_section .form_container button {
-  background-color: #fc5d35;
+  background-color: #b5f7ec;
   border: none;
   outline: none;
   color: #fff;
