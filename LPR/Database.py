@@ -76,7 +76,8 @@ def get_details(id):
     res = cursor.fetchall()
     if len(res) > 0:
         data_lst = res[0]
-        data = pd.DataFrame([data_lst], columns=['Vehicle Number', 'Name', 'Contact', 'Address'])
+        data=data_lst
+        #data = pd.DataFrame([data_lst], columns=['Vehicle Number', 'Name', 'Contact', 'Address'])
     close_db(conn)
     return data
 
@@ -105,7 +106,7 @@ def get_history_data():
     :return: data in form of list of dictionaries: [{'Status':'1','Timestamp':'2','Path':'3'},{'Status':'1','Timestamp':'2','Path':'3'}]
     '''
     conn = create_connection()
-    get_query = "SELECT vehicle_id,status,photo,timestamp FROM history_data;"
+    get_query = "SELECT vehicle_id,status,photo,timestamp FROM history_data ORDER BY vehicle_id DESC;"
     cursor = conn.cursor()
     cursor.execute(get_query)
     results = cursor.fetchall()
@@ -194,6 +195,6 @@ def query_drop_all(table):
 if __name__ == "__main__":
     # create_history_data_table()
     # drop_table('history_data')
-    print(clean_timestamp('20210523#11:32:04'))
-    # print(get_details('HR26DK8337'))
+    #print(clean_timestamp('20210523#11:32:04'))
+     print(get_history_data())
     # query_drop_all('history_data')

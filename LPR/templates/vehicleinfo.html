@@ -1,5 +1,169 @@
-<form method="post">
-  <label for="vehicle_id">Vehicle info:</label>
-  <input type="text" id="vehicle_id" name="vehicle_id"><br><br>
-  <input type="submit" value="Submit">
-</form>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>User</title>
+
+  <!-- slider stylesheet -->
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet" />
+  <!-- Custom styles for this template -->
+  <link href="/static/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="/static/css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .blink {
+      animation: blink 2s steps(5, start) infinite;
+      -webkit-animation: blink 1s steps(5, start) infinite;
+        color: #fc5d35;
+    }
+    @keyframes blink {
+      to {
+        visibility: hidden;
+      }
+    }
+    @-webkit-keyframes blink {
+      to {
+        visibility: hidden;
+      }
+    }
+
+    .alert {
+  padding: 20px;
+  background-color: #f44336;
+  color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
+
+    </style>
+</head>
+
+<body class="hero_area sub_pages">
+
+  <div class="hero_area sub_pages">
+    <!-- header section strats -->
+    <header class="header_section">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container pt-3">
+          <a class="navbar-brand" href="/">
+            <img src="/static/images/logo.png" alt="" /><span>
+              LPR
+            </span>
+          </a>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+
+
+
+
+  <!-- service section -->
+
+  <section class="service_section layout_padding " style="">
+    <div class="container">
+
+
+
+         <div class="card mb-3">
+
+
+
+
+  <img src="{{ url_for('static', filename=image) }}" class="card-img-top" alt="...">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">Contact Number</th>
+        <th scope="col">Licence</th>
+        <th scope="col">Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+
+        <td>{{name}}</td>
+                        <td>{{address}}</td>
+                        <td>{{contact}}</td>
+                        <td>{{licence}}</td>
+                        <td>{{time}}</td>
+
+      </tr>
+
+
+    </tbody>
+  </table>
+
+
+        </div>
+
+
+
+    </div>
+  </section>
+
+  <!-- end service section -->
+
+
+    </div>
+
+
+  <script type="text/javascript" src="/static/js/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript" src="/static/js/bootstrap.js"></script>
+<script>$.fn.center = function () {
+  this.css("position","absolute");
+  this.css("top", Math.max(0, (
+    ($(window).height() - $(this).outerHeight()) / 2) +
+     $(window).scrollTop()) + "px" - 150
+  );
+  this.css("left", Math.max(0, (
+    ($(window).width() - $(this).outerWidth()) / 2) +
+     $(window).scrollLeft()) + "px"-200
+  );
+  return this;
+}
+
+$("#overlay").show();
+$("#overlay-content").show().center();
+
+setTimeout(function(){
+  $("#overlay").fadeOut();
+}, 2000);</script>
+
+
+</body>
+
+</html>

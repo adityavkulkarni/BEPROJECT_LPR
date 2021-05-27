@@ -119,9 +119,14 @@ def upload_file():
             cv2.imwrite(IMAGE_OUTPUT_DIR + 'detected_' + paths.TIMESTAMP() + '.jpg', image)
             db.insert_history_data(1, cur_name)
             is_history_updated = True
-            return render_template('upload.html',
+            return render_template('vehicleinfo.html',
                                    type2='',
-                                   tab=Markup(data.to_html(classes='table')))
+                                   licence=data[0],
+                                   name =data[1],
+                                   address=data[3] ,
+                                   contact= data[2],
+                                   time=clean_timestamp(TIMESTAMP()),
+                                   image='tempdata/' + cur_name)
         else:
             ## If number plate not present in database - go to warning page
             global flag, num
