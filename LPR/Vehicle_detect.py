@@ -67,11 +67,12 @@ def clean_text(txt):
     return txt
 
 
-def get_object(image, model):
+def get_object(image, model,draw_on_image = True):
     '''
     Gets vehicle/number plate from image
     :param image: image file
     :param model: object to detect (vehicle[yolo]/number plate[lapi)
+    :param draw_on_image: True if we want text on image
     :return  stat: presence of object (True/False)
     :return  roi: sliced image containing object
     :return  img: image file with object markings
@@ -127,29 +128,30 @@ def get_object(image, model):
             x, y, w, h = boxes[i]
             # label = str(classes[class_ids[i]])
             color = [0, 255, 0]
-            cv2.rectangle(img, (x, y), (x + w, y + h), color, 2)
+            if draw_on_image :cv2.rectangle(img, (x, y), (x + w, y + h), color, 2)
             roi.append(get_roi(image, x, y, w, h))
             dims = [x, y, w, h]
     return stat, roi, img, dims
 
 
-def detect_img(image):
+def detect_img(image,draw_on_image = True):
     '''
     Gets the text from image (wrapper on all functions in this file)
     :param image: image file
+    :param draw_on_image: True if we want text on image
     :return text: detected text from image
     :return image: marked image
     '''
     start = timeit.default_timer()
     text = ''
     ## Get vehicle and number plate
-    stat_v, roi, image, dim = get_object(image, model='yolo')
-    stat, plates, image, dim = get_object(image, model='lapi')
+    stat_v, roi, image, dim = get_object(image, model='yolo',draw_on_image=draw_on_image)
+    stat, plates, image, dim = get_object(image, model='lapi',draw_on_image=draw_on_image)
     ## Mark them in image
     if stat:
         for j in range(len(plates)):
             text = read_num(plates[j])
-            image = put_text(image, dim, text)
+            if draw_on_image : image = put_text(image, dim, text)
             print('PLATE FOUND\nTEXT: ' + text)
     stop = timeit.default_timer()
     print("TIME:" + str(stop - start))

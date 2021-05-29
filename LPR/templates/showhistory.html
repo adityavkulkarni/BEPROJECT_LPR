@@ -157,7 +157,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{dict_item['Timestamp']}}</h5>
                         <p class="card-text">{{dict_item['Status']}}</p>
-                        <a href="#" class="text-uppercase custom_green-btn mr-3">Details</a>
+                        <a href="/historydetails/{{ dict_item['Path'] | replace('/', '*') }} " class="text-uppercase custom_green-btn mr-3">Details</a>
                     </div>
                 </div>
             </div>
@@ -173,7 +173,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{dict_item['Timestamp']}}</h5>
                         <p class="card-text">{{dict_item['Status']}}</p>
-                        <a href="#" class="text-uppercase custom_red-btn mr-3">Details</a>
+                        <a href="/historydetails/{{ dict_item['Path'] | replace('/', '*') }} " class="text-uppercase custom_red-btn mr-3">Details</a>
                     </div>
                 </div>
             </div>

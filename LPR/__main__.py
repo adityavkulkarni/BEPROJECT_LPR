@@ -98,7 +98,7 @@ def upload_file():
         img = cv2.imdecode(npimg, cv2.IMREAD_LOAD_GDAL)
 
         ## Get text and marked image from OCR
-        text, image = detect_img(image=img)
+        text, image = detect_img(image=img,draw_on_image = False)
         cur_name = 'detected_' + TIMESTAMP() + '.png'
         cv2.imwrite(TEMP_DIR_PATH + cur_name, image)
 
@@ -140,6 +140,44 @@ def upload_file():
                                    name='tempdata/' + cur_name,
                                    enable='true',
                                    time=clean_timestamp(TIMESTAMP()))
+
+@app.route('/historydetails/<path>', methods=['GET', 'POST'])
+def historydetails(path):
+    print(path.replace('*','/'))
+    text, image = detect_img(image=cv2.imread(os.curdir+path.replace('*','/')), draw_on_image = False)
+    cur_name = 'detected_' + TIMESTAMP() + '.png'
+    cv2.imwrite(TEMP_DIR_PATH + cur_name, image)
+
+    ## If number plate not detected - pass to warning page
+    if len(text) < 1:
+        print("Number Plate not detected")
+        return render_template('warning.html',
+                               static_url_path='/static',
+                               name='tempdata/' + cur_name,
+                               time=clean_timestamp(TIMESTAMP()))
+
+    ## If number plate detected - check database
+    data = db.get_details(text)
+    if data is not None:
+        return render_template('vehicleinfo.html',
+                               type2='',
+                               licence=data[0],
+                               name=data[1],
+                               address=data[3],
+                               contact=data[2],
+                               time=clean_timestamp(TIMESTAMP()),
+                               image='tempdata/' + cur_name)
+    else:
+        ## If number plate not present in database - go to warning page
+        global flag, num
+        num = text
+        flag = 'true'
+        return render_template('warning.html',
+                               static_url_path='/static',
+                               name='tempdata/' + cur_name,
+                               enable='true',
+                               time=clean_timestamp(TIMESTAMP()))
+
 
 ## Run app on specified port
 if __name__=='__main__':
