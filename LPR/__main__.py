@@ -1,13 +1,17 @@
+'''
+PROJECT EXPLANATION
+'''
 import glob
 
 import cv2
 import numpy as np
-from flask import Flask, render_template, request, Markup
+from flask import Flask, render_template, request
+import os
 
 import Database as db
 import paths
 from Vehicle_detect import detect_img
-from paths import *
+from paths import IMAGE_OUTPUT_DIR,TEMP_DIR_PATH,TIMESTAMP,clean_timestamp
 
 ## Initiate App
 app = Flask(__name__)
@@ -16,10 +20,10 @@ app.config['STATIC_FOLDER'] = 'static'
 ## Set global flags and refresh temp directory
 for f in glob.glob(TEMP_DIR_PATH + '*'):
     os.remove(f)
-flag = None
-num = None
-is_history_updated = False
-history = db.get_history_data()
+FLAG = None
+NUM = None
+IS_HISTORY_UPDATED = False
+HISTORY = db.get_history_data()
 
 
 
@@ -47,10 +51,11 @@ def render_history():
     Render history page
     URL - localhost:port/showhistory
     '''
-    global history, is_history_updated
-    if is_history_updated: history = db.get_history_data()
+    global HISTORY, IS_HISTORY_UPDATED
+    if IS_HISTORY_UPDATED:
+        HISTORY = db.get_history_data()
     return render_template('showhistory.html',
-                           parent_list=history)
+                           parent_list=HISTORY)
 
 
 @app.route('/addavehicle', methods=['GET', 'POST'])
@@ -61,19 +66,19 @@ def render_addavehicle():
     '''
     if request.method == 'POST':
         ## Get data from form
-        id = request.form['vehicleno']
+        vehicle_id = request.form['vehicleno']
         name = request.form['name']
         contact_no = request.form['contactno']
         address = request.form['address']
         ## Insert data into db
-        db.insert_data(id, name, contact_no, address)
+        db.insert_data(vehicle_id, name, contact_no, address)
         return render_template('addavehicle.html')
     else:
         ## For recieving redirect from warning page
-        global flag, num
+        global FLAG, NUM
         return render_template('addavehicle.html',
-                               flag=flag,
-                               num=num)
+                               flag=FLAG,
+                               num=NUM)
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_pre():
     '''
@@ -90,7 +95,7 @@ def upload_file():
      Render upload vehicle page
      URL - localhost:port/uploader
     '''
-    global is_history_updated
+    global IS_HISTORY_UPDATED
     if request.method == 'POST':
         ## Get image from form
         filestr = request.files['file'].read()
@@ -106,7 +111,7 @@ def upload_file():
         if len(text) < 1:
             print("Number Plate not detected")
             db.insert_history_data(0, cur_name)
-            is_history_updated = True
+            IS_HISTORY_UPDATED = True
             return render_template('warning.html',
                                    static_url_path='/static',
                                    name='tempdata/' + cur_name,
@@ -118,7 +123,7 @@ def upload_file():
             ## If number plate present in databse - go to view vehicle info page
             cv2.imwrite(IMAGE_OUTPUT_DIR + 'detected_' + paths.TIMESTAMP() + '.jpg', image)
             db.insert_history_data(1, cur_name)
-            is_history_updated = True
+            IS_HISTORY_UPDATED = True
             return render_template('vehicleinfo.html',
                                    type2='',
                                    licence=data[0],
@@ -129,12 +134,12 @@ def upload_file():
                                    image='tempdata/' + cur_name)
         else:
             ## If number plate not present in database - go to warning page
-            global flag, num
-            num = text
-            flag = 'true'
+            global FLAG, NUM
+            NUM = text
+            FLAG = 'true'
             cv2.imwrite(IMAGE_OUTPUT_DIR + 'detected_' + paths.TIMESTAMP() + '.jpg', image)
             db.insert_history_data(2, cur_name)
-            is_history_updated = True
+            IS_HISTORY_UPDATED = True
             return render_template('warning.html',
                                    static_url_path='/static',
                                    name='tempdata/' + cur_name,
@@ -144,7 +149,8 @@ def upload_file():
 @app.route('/historydetails/<path>', methods=['GET', 'POST'])
 def historydetails(path):
     print(path.replace('*','/'))
-    text, image = detect_img(image=cv2.imread(os.curdir+path.replace('*','/')), draw_on_image = False)
+    text, image = detect_img(image=cv2.imread(os.curdir+path.replace('*','/'))
+                             , draw_on_image = False)
     cur_name = 'detected_' + TIMESTAMP() + '.png'
     cv2.imwrite(TEMP_DIR_PATH + cur_name, image)
 
@@ -169,9 +175,9 @@ def historydetails(path):
                                image='tempdata/' + cur_name)
     else:
         ## If number plate not present in database - go to warning page
-        global flag, num
-        num = text
-        flag = 'true'
+        global FLAG, NUM
+        NUM = text
+        FLAG = 'true'
         return render_template('warning.html',
                                static_url_path='/static',
                                name='tempdata/' + cur_name,
